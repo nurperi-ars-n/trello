@@ -11,13 +11,17 @@ const useStyle = makeStyles((theme) => ({
          margin:theme.spacing(1),
         '&:focus':{
              background:'#ddd',
+            fontSize:'1,2rem',
+            fontWeight:'bold'
         }
     },
     editableTitle:{
-      flexGrow:1
+      flexGrow:1,
+        fontSize:'1,2rem',
+        fontWeight:'bold'
     }
 }))
-export default function Title () {
+export default function Title ({title}) {
     const [open,setOpen] = useState(false)
     const classes = useStyle()
     return (
@@ -25,12 +29,16 @@ export default function Title () {
             {
                 open ? (
                     <div>
-                        <InputBase inputProps={{className:classes.input,}} fullWidth onBlur ={() => setOpen(!open)}  value='Todo'/>
+                        <InputBase autoFocus
+                                   inputProps={{className:classes.input,}}
+                                   fullWidth
+                                   onBlur ={() => setOpen(!open)}
+                                   value={title}/>
                     </div>
                 )
                     :(
                         <div className={classes.editableTitleContainer}>
-                            <Typography className={classes.editableTitle} onClick={() => setOpen(!open)}>Todo</Typography>
+                            <Typography className={classes.editableTitle} onClick={() => setOpen(!open)}>{title}</Typography>
                        <MoreHorizIcon/>
                         </div>
                     )
